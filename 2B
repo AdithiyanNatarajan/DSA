@@ -40,3 +40,9 @@ int main() {
         displayStudentDetails(&students[i]);
         printf("\n");
 }
+
+        }
+    }
+    return topStudent;
+}
+
