@@ -47,3 +47,35 @@ void towerOfHanoi(int numDisks, Stack *source, Stack *auxiliary, Stack *destinat
         displayMove(s, d, disk);
         return;
     }
+    towerOfHanoi(numDisks - 1, source, destination, auxiliary, s, d, a);
+    int disk = pop(source);
+    push(destination, disk);
+    displayMove(s, d, disk);
+    towerOfHanoi(numDisks - 1, auxiliary, source, destination, a, s, d);
+}
+
+int main() {
+    int numDisks;
+    printf("Enter the number of disks: ");
+    scanf("%d", &numDisks);
+
+    Stack source, auxiliary, destination;
+    initialize(&source, numDisks);
+    initialize(&auxiliary, numDisks);
+    initialize(&destination, numDisks);
+
+    for (int i = numDisks; i >= 1; i--) {
+        push(&source, i);
+    }
+
+    printf("Moves to solve the Tower of Hanoi with %d disks:\n", numDisks);
+    towerOfHanoi(numDisks, &source, &auxiliary, &destination, 'A', 'B', 'C');
+
+    // Free allocated memory
+    free(source.items);
+    free(auxiliary.items);
+    free(destination.items);
+
+    return 0;
+}
+
